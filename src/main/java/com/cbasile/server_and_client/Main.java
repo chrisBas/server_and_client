@@ -2,21 +2,28 @@ package com.cbasile.server_and_client;
 
 import java.io.IOException;
 
-import com.cbasile.server_and_client.server.EchoProtocolHandler;
+import com.cbasile.server_and_client.iot.IotProtocolHandler;
+import com.cbasile.server_and_client.iot.IotRequest;
+import com.cbasile.server_and_client.iot.IotSocketConnection;
 import com.cbasile.server_and_client.server.Server;
-import com.cbasile.server_and_client.shared.SocketConnection;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		int serverPort = 9500;
-		Server server = new Server(serverPort, 1, new EchoProtocolHandler());
+		Server server = new Server(serverPort, 1, new IotProtocolHandler());
 		server.listen();
 		new Thread(() -> {
 			try {
-				SocketConnection client = new SocketConnection("localhost", serverPort);
+				IotSocketConnection client = new IotSocketConnection("localhost", serverPort);
 				Thread.sleep(200);
-				client.sendMsg("hello from A");
+				IotRequest request = new IotRequest();
+				request.setMessage("register");
+				client.sendMsg(request);
+				System.out.println(client.getMsg(0));
+				
+				request.setMessage("list");
+				client.sendMsg(request);
 				System.out.println(client.getMsg(0));
 				client.stop();
 			} catch (Exception e) {
@@ -26,9 +33,11 @@ public class Main {
 
 		new Thread(() -> {
 			try {
-				SocketConnection client = new SocketConnection("localhost", serverPort);
+				IotSocketConnection client = new IotSocketConnection("localhost", serverPort);
 				Thread.sleep(300);
-				client.sendMsg("hello from B");
+				IotRequest request = new IotRequest();
+				request.setMessage("bad request");
+				client.sendMsg(request);
 				System.out.println(client.getMsg(0));
 				client.stop();
 			} catch (Exception e) {
