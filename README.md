@@ -4,7 +4,7 @@ This java project shows a basic Server-Client architecture built using Sockets a
 ## Purpose
 * Can be used as a starting-point for more complex servers such as
   * Messaging server
-  * IOT server
+  * IOT server - [actual (partial) implementation](https://github.com/chrisBas/server_and_client/tree/iot_server)
   * HTTP server
   
 ## Features
