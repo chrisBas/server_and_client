@@ -60,7 +60,7 @@ public class ConnectionManager implements Runnable {
 							it.remove();
 						} else {
 							LOG.trace("Received message '{}' from '{}'", msg, connection.getRemoteSocketAddress());
-							connection.sendMsg(protocolHandler.handleMsg(msg));
+							connection.sendMsg(protocolHandler.handleMsg(connection.getRemoteSocketAddress().toString(), msg));
 						}
 					} catch (SocketTimeoutException e) {
 						// do nothing, this means the read did not complete in the timeout
