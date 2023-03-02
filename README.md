@@ -6,6 +6,14 @@ This java project shows a basic Server-Client architecture built using Sockets a
   * Messaging server
   * IOT server
   * HTTP server
+  
+## Features
+* Multithreaded
+  * The Server contains 2 threads; ne for listening for new connections, and one for managing existing connections
+* Extendible Protocol
+  * The Server takes in a parameter of a ProtocolHandler.  Any implementation can be created to satisfy the need of different types servers.
+  * The current protocol is an EchoProtocolHandler which returns "echo: <msg>"
+  * The current implementation works on a single request and single response; this would need to change for certain implementations where a user could send x requests before receiving any responses or visa-versa
 
 ## How to Use
 * clone the github repo
