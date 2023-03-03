@@ -22,6 +22,7 @@ public class Server {
 	 * @param connectionTimeout is the length of time that the connection manager will wait for a connection to send a message
 	 * */
 	public Server(int port, int connectionTimeout, ProtocolHandler protocolHandler) throws IOException {
+		LOG.info("Creating server on port '{}'", port);
 		this.serverSocket = new ServerSocket(port);
 		this.continueListening = true;
 		this.connectionManager = new ConnectionManager(connectionTimeout, protocolHandler);
