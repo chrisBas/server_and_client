@@ -20,6 +20,15 @@ This java project shows a basic Server-Client architecture built using Sockets a
 ```bash
 git clone https://github.com/chrisBas/server_and_client.git
 ```
-* open the project in Eclipse
-* Open the file com.cbasile.server_and_client.Main.java
-* Run this file
+1. Run in Eclipse
+	* Open and run the file com.cbasile.server_and_client.Main.java
+2. Run with Maven
+	* Open the command line and run the following:
+	```bash
+	mvn clean compile assembly:single
+	java -jar target/server_and_client-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+	```
+    * Separetely, connect a client which can be done from the command line using the 'nc' command as such
+    ```bash
+        nc localhost 9500
+    ```
